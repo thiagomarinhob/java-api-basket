@@ -1,57 +1,35 @@
 package com.basket.api.web;
 
+import com.basket.api.model.useCase.game.CreateGameUseCase;
 import com.basket.api.model.useCase.game.GameRequest;
 import com.basket.api.model.useCase.game.GameResponse;
-import com.basket.api.model.useCase.game.CreateGameUseCase;
 import com.basket.api.model.useCase.game.ListGameByLeagueIdUseCase;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.naming.AuthenticationException;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/games")
-@Tag(name = "Jogos", description = "Endpoints para agendamento e finalização de jogos")
-@SecurityRequirement(name = "bearer-key")
-public class GameController {
-
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
+public class GameController implements GameAPI {
 
     private final CreateGameUseCase createGameUseCase;
     private final ListGameByLeagueIdUseCase listGameByLeagueIdUseCase;
 
-    public GameController(CreateGameUseCase createGameUseCase, ListGameByLeagueIdUseCase listGameByLeagueIdUseCase) {
-        this.createGameUseCase = createGameUseCase;
-        this.listGameByLeagueIdUseCase = listGameByLeagueIdUseCase;
-    }
-
-    @PostMapping
-    @Operation(summary = "Agenda um novo jogo", description = "Cria um novo jogo com o status 'SCHEDULED'. Requer autenticação de ADMIN.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Jogo agendado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos (ex: time da casa igual ao visitante)"),
-            @ApiResponse(responseCode = "403", description = "Acesso negado"),
-            @ApiResponse(responseCode = "404", description = "Liga ou time não encontrado")
-    })
-    @SecurityRequirement(name = "bearer-key")
-    public ResponseEntity<GameResponse> createGame(@RequestBody GameRequest gameRequest) {
+    @Override
+    public ResponseEntity<GameResponse> createGame(@RequestBody GameRequest gameRequest) throws AuthenticationException {
         GameResponse game = createGameUseCase.execute(gameRequest);
         return ResponseEntity.ok(game);
     }
 
-    @GetMapping("/league/{leagueId}")
-    @Operation(summary = "Lista todos os jogos de uma liga", description = "Retorna uma lista de jogos para um ID de liga específico.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
-            @ApiResponse(responseCode = "404", description = "Liga não encontrada")
-    })
-    @SecurityRequirement(name = "bearer-key")
-    public ResponseEntity<List<GameResponse>> listGamesByLeague(@PathVariable UUID leagueId) {
+    @Override
+    public ResponseEntity<List<GameResponse>> listGamesByLeague(@PathVariable UUID leagueId) throws AuthenticationException {
         List<GameResponse> list = listGameByLeagueIdUseCase.execute(leagueId);
         return ResponseEntity.ok(list);
     }

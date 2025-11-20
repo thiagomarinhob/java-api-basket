@@ -1,26 +1,24 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.gameEvent.GameEventRequest;
 import com.basket.api.model.entity.GameEvent;
 import com.basket.api.model.useCase.gameEvent.AddGameEventUseCase;
+import com.basket.api.model.useCase.gameEvent.GameEventRequest;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.naming.AuthenticationException;
+
 @RestController
-@RequestMapping("/games/events")
-public class GameEventController {
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
+public class GameEventController implements GameEventAPI {
 
     private final AddGameEventUseCase addGameEventUseCase;
 
-    public GameEventController(AddGameEventUseCase addGameEventUseCase) {
-        this.addGameEventUseCase = addGameEventUseCase;
-    }
-
-    @PostMapping
-    public ResponseEntity<GameEvent> createGameEvent(@RequestBody GameEventRequest request) {
+    @Override
+    public ResponseEntity<GameEvent> createGameEvent(@RequestBody GameEventRequest request) throws AuthenticationException {
         GameEvent event = addGameEventUseCase.execute(request);
         return ResponseEntity.ok(event);
     }
