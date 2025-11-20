@@ -1,7 +1,7 @@
 package com.basket.api.web;
 
-import com.basket.api.model.entity.User;
-import com.basket.api.model.useCase.user.CreateUserRequest;
+import com.basket.api.domain.entity.User;
+import com.basket.api.domain.useCase.user.CreateUserRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

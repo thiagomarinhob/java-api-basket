@@ -1,7 +1,7 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.teamPlayer.ListPlayersResponse;
-import com.basket.api.model.useCase.teamPlayer.TeamPlayerResponse;
+import com.basket.api.domain.useCase.teamPlayer.ListPlayersResponse;
+import com.basket.api.domain.useCase.teamPlayer.TeamPlayerResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;

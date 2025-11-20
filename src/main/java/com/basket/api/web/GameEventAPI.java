@@ -1,7 +1,7 @@
 package com.basket.api.web;
 
-import com.basket.api.model.entity.GameEvent;
-import com.basket.api.model.useCase.gameEvent.GameEventRequest;
+import com.basket.api.domain.entity.GameEvent;
+import com.basket.api.domain.useCase.gameEvent.GameEventRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

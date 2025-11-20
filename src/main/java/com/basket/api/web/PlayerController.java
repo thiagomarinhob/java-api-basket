@@ -1,7 +1,7 @@
 package com.basket.api.web;
 
-import com.basket.api.model.entity.Player;
-import com.basket.api.model.useCase.player.CreatePlayerUseCase;
+import com.basket.api.domain.entity.Player;
+import com.basket.api.domain.useCase.player.CreatePlayerUseCase;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

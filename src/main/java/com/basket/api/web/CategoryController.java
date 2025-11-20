@@ -1,8 +1,8 @@
 package com.basket.api.web;
 
-import com.basket.api.model.entity.Category;
-import com.basket.api.model.useCase.category.CategoryRequest;
-import com.basket.api.model.useCase.category.CreateCategoryUseCase;
+import com.basket.api.domain.entity.Category;
+import com.basket.api.domain.useCase.category.CategoryRequest;
+import com.basket.api.domain.useCase.category.CreateCategoryUseCase;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

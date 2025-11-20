@@ -1,8 +1,8 @@
 package com.basket.api.web;
 
-import com.basket.api.model.entity.GameEvent;
-import com.basket.api.model.useCase.gameEvent.AddGameEventUseCase;
-import com.basket.api.model.useCase.gameEvent.GameEventRequest;
+import com.basket.api.domain.entity.GameEvent;
+import com.basket.api.domain.useCase.gameEvent.AddGameEventUseCase;
+import com.basket.api.domain.useCase.gameEvent.GameEventRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
