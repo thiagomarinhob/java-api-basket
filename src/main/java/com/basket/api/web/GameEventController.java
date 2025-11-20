@@ -1,6 +1,6 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.gameEvent.GameEventRequestDTO;
+import com.basket.api.model.useCase.gameEvent.GameEventRequest;
 import com.basket.api.model.entity.GameEvent;
 import com.basket.api.model.useCase.gameEvent.AddGameEventUseCase;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class GameEventController {
     }
 
     @PostMapping
-    public ResponseEntity<GameEvent> createGameEvent(@RequestBody GameEventRequestDTO request) {
+    public ResponseEntity<GameEvent> createGameEvent(@RequestBody GameEventRequest request) {
         GameEvent event = addGameEventUseCase.execute(request);
         return ResponseEntity.ok(event);
     }

@@ -40,7 +40,7 @@ public class RecordGameStatsUseCase {
     }
 
     @Transactional
-    public void execute(UUID gameId, List<PlayerStatsRequestDTO> playerStatsList) {
+    public void execute(UUID gameId, List<PlayerStatsRequest> playerStatsList) {
         Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new ResourceNotFoundException("Jogo não encontrado com o ID: " + gameId));
 

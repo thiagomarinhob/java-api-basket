@@ -1,8 +1,8 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.stats.GameStatsResponseDTO;
-import com.basket.api.model.useCase.stats.PlayerStatsRequestDTO;
-import com.basket.api.model.useCase.stats.PlayerStatsResponseDTO;
+import com.basket.api.model.useCase.stats.GameStatsResponse;
+import com.basket.api.model.useCase.stats.PlayerStatsRequest;
+import com.basket.api.model.useCase.stats.PlayerStatsResponse;
 import com.basket.api.model.useCase.stats.GetGameStatsUseCase;
 import com.basket.api.model.useCase.stats.GetPlayerStatsInGameUseCase;
 import com.basket.api.model.useCase.stats.RecordGameStatsUseCase;
@@ -36,7 +36,7 @@ public class GameStatsController {
             description = "Ao final de um jogo, submete uma lista com as estatísticas consolidadas de cada jogador. O sistema irá calcular o placar final e marcar a partida como 'COMPLETED'.")
     public ResponseEntity<Void> recordGameStats(
             @PathVariable UUID gameId,
-            @RequestBody List<PlayerStatsRequestDTO> playerStatsList) {
+            @RequestBody List<PlayerStatsRequest> playerStatsList) {
 
         recordGameStatsUseCase.execute(gameId, playerStatsList);
         return ResponseEntity.ok().build();
@@ -45,18 +45,18 @@ public class GameStatsController {
     @GetMapping("/{gameId}/stats")
     @Operation(summary = "Busca as estatísticas completas de uma partida",
             description = "Retorna o placar final e a lista de estatísticas individuais de cada jogador que participou da partida.")
-    public ResponseEntity<GameStatsResponseDTO> getGameStats(@PathVariable UUID gameId) {
-        GameStatsResponseDTO response = getGameStatsUseCase.execute(gameId);
+    public ResponseEntity<GameStatsResponse> getGameStats(@PathVariable UUID gameId) {
+        GameStatsResponse response = getGameStatsUseCase.execute(gameId);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{gameId}/players/{playerId}/stats")
     @Operation(summary = "Busca as estatísticas de um jogador específico em uma partida",
             description = "Retorna as estatísticas detalhadas de um único jogador para uma partida específica.")
-    public ResponseEntity<PlayerStatsResponseDTO> getPlayerStatsInGame(
+    public ResponseEntity<PlayerStatsResponse> getPlayerStatsInGame(
             @PathVariable UUID gameId,
             @PathVariable UUID playerId) {
-        PlayerStatsResponseDTO response = getPlayerStatsInGameUseCase.execute(gameId, playerId);
+        PlayerStatsResponse response = getPlayerStatsInGameUseCase.execute(gameId, playerId);
         return ResponseEntity.ok(response);
     }
 }

@@ -1,8 +1,8 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.league.LeagueRequestDTO;
-import com.basket.api.model.useCase.league.LeagueResponseDTO;
-import com.basket.api.model.useCase.league.TeamStandingsDTO;
+import com.basket.api.model.useCase.league.LeagueRequest;
+import com.basket.api.model.useCase.league.LeagueResponse;
+import com.basket.api.model.useCase.league.TeamStandingsResponse;
 import com.basket.api.model.useCase.league.CreateLeagueUseCase;
 import com.basket.api.model.useCase.league.GetLeagueByIdUseCase;
 import com.basket.api.model.useCase.league.GetLeagueStandingsUseCase;
@@ -45,8 +45,8 @@ public class LeagueController {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "409", description = "Liga com este nome já existe")
     })
-    public ResponseEntity<Object> createLeague(@Valid @RequestBody LeagueRequestDTO leagueRequestDTO) {
-        var result = this.createLeagueUseCase.execute(leagueRequestDTO);
+    public ResponseEntity<Object> createLeague(@Valid @RequestBody LeagueRequest leagueRequest) {
+        var result = this.createLeagueUseCase.execute(leagueRequest);
         return ResponseEntity.ok().body(result);
     }
 
@@ -56,14 +56,14 @@ public class LeagueController {
             @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
             @ApiResponse(responseCode = "404", description = "Liga não encontrada")
     })
-    public ResponseEntity<LeagueResponseDTO> getLeague(@PathVariable UUID id) {
-        LeagueResponseDTO leagueResponse = getLeagueByIdUseCase.execute(id);
+    public ResponseEntity<LeagueResponse> getLeague(@PathVariable UUID id) {
+        LeagueResponse leagueResponse = getLeagueByIdUseCase.execute(id);
         return ResponseEntity.ok(leagueResponse);
     }
 
     @GetMapping
     @Operation(summary = "Busca todas as ligas", description = "Retorna todas as ligas cadastradas")
-    public ResponseEntity<List<LeagueResponseDTO>> getAllLeagues() {
+    public ResponseEntity<List<LeagueResponse>> getAllLeagues() {
         var leagues = this.listLeaguesUseCase.execute();
         return ResponseEntity.ok(leagues);
     }
@@ -71,8 +71,8 @@ public class LeagueController {
     @GetMapping("/{leagueId}/standings")
     @Operation(summary = "Busca a tabela de classificação de uma liga",
             description = "Retorna uma lista ordenada de times com suas respectivas estatísticas (pontos, vitórias, saldo, etc.)")
-    public ResponseEntity<List<TeamStandingsDTO>> getStandings(@PathVariable UUID leagueId) {
-        List<TeamStandingsDTO> standings = getLeagueStandingsUseCase.execute(leagueId);
+    public ResponseEntity<List<TeamStandingsResponse>> getStandings(@PathVariable UUID leagueId) {
+        List<TeamStandingsResponse> standings = getLeagueStandingsUseCase.execute(leagueId);
         return ResponseEntity.ok(standings);
     }
 

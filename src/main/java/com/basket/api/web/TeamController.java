@@ -1,7 +1,7 @@
 package com.basket.api.web;
 
 import com.basket.api.model.entity.Team;
-import com.basket.api.model.useCase.team.TeamResponseDTO;
+import com.basket.api.model.useCase.team.TeamResponse;
 import com.basket.api.model.useCase.team.CreateTeamUseCase;
 import com.basket.api.model.useCase.team.ListTeamUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,7 +48,7 @@ public class TeamController {
             @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
             @ApiResponse(responseCode = "404", description = "Time não encontrado")
     })
-    public ResponseEntity<TeamResponseDTO> getTeam(@PathVariable UUID id) {
+    public ResponseEntity<TeamResponse> getTeam(@PathVariable UUID id) {
         var result = this.listTeamUseCase.execute(id);
         return ResponseEntity.ok().body(result);
     }

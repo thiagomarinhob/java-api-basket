@@ -4,7 +4,7 @@ import com.basket.api.model.entity.GameEventType;
 
 import java.util.UUID;
 
-public record GameEventRequestDTO(
+public record GameEventRequest(
         UUID gameId,
         UUID teamId,
         UUID playerId,

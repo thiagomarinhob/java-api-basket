@@ -2,7 +2,7 @@ package com.basket.api.model.useCase.league;
 
 import java.util.UUID;
 
-public record TeamStandingsDTO(
+public record TeamStandingsResponse(
         UUID teamId,
         String teamName,
         String teamLogoUrl,

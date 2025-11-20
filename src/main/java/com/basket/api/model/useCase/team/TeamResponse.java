@@ -1,11 +1,11 @@
 package com.basket.api.model.useCase.team;
 
-import com.basket.api.model.useCase.category.CategoryResponseDTO;
+import com.basket.api.model.useCase.category.CategoryResponse;
 
 import java.util.List;
 import java.util.UUID;
 
-public record TeamResponseDTO(
+public record TeamResponse(
         UUID id,
         String name,
         String shortName,
@@ -13,6 +13,6 @@ public record TeamResponseDTO(
         String location,
         String description,
         Integer ranking,
-        List<CategoryResponseDTO> categories
+        List<CategoryResponse> categories
 ) {
 }

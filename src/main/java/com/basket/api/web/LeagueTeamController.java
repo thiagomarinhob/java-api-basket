@@ -1,8 +1,9 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.leagueTeam.ListTeamDTO;
-import com.basket.api.model.useCase.leagueTeam.AddTeamToLeagueUseCase;
-import com.basket.api.model.useCase.leagueTeam.ListLeagueTeamsUseCase;
+import com.basket.api.model.useCase.leagueTeam.AddTeamToLeagueRequest;
+import com.basket.api.model.useCase.leagueTeam.DefaultAddTeamToLeagueUseCase;
+import com.basket.api.model.useCase.leagueTeam.DefaultListLeagueTeamsUseCase;
+import com.basket.api.model.useCase.leagueTeam.ListTeamResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -21,10 +22,11 @@ import java.util.UUID;
 public class LeagueTeamController {
 
 
-    private final AddTeamToLeagueUseCase addTeamToLeagueUseCase;
-    private final ListLeagueTeamsUseCase listLeagueTeamsUseCase;
+    private final DefaultAddTeamToLeagueUseCase addTeamToLeagueUseCase;
+    private final DefaultListLeagueTeamsUseCase listLeagueTeamsUseCase;
 
-    public LeagueTeamController(AddTeamToLeagueUseCase addTeamToLeagueUseCase, ListLeagueTeamsUseCase listLeagueTeamsUseCase) {
+    public LeagueTeamController(DefaultAddTeamToLeagueUseCase addTeamToLeagueUseCase,
+                                DefaultListLeagueTeamsUseCase listLeagueTeamsUseCase) {
         this.addTeamToLeagueUseCase = addTeamToLeagueUseCase;
         this.listLeagueTeamsUseCase = listLeagueTeamsUseCase;
     }
@@ -38,7 +40,8 @@ public class LeagueTeamController {
             @ApiResponse(responseCode = "409", description = "Time já pertence a esta liga")
     })
     public ResponseEntity<Object> AddTeamToLeague(@PathVariable UUID leagueId, @PathVariable UUID teamId) {
-        var result = this.addTeamToLeagueUseCase.execute(leagueId, teamId);
+        var request = new AddTeamToLeagueRequest(leagueId, teamId);
+        var result = this.addTeamToLeagueUseCase.execute(request);
         return ResponseEntity.ok().body(result);
     }
 
@@ -48,8 +51,8 @@ public class LeagueTeamController {
             @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
             @ApiResponse(responseCode = "404", description = "Liga não encontrada")
     })
-    public ResponseEntity<List<ListTeamDTO>> getTeam(@PathVariable UUID leagueId) {
-        List<ListTeamDTO> result = listLeagueTeamsUseCase.execute(leagueId);
+    public ResponseEntity<List<ListTeamResponse>> getTeam(@PathVariable UUID leagueId) {
+        List<ListTeamResponse> result = listLeagueTeamsUseCase.execute(leagueId);
         return ResponseEntity.ok().body(result);
     }
 }

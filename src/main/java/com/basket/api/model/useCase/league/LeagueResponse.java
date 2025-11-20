@@ -3,7 +3,7 @@ package com.basket.api.model.useCase.league;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public record LeagueResponseDTO(
+public record LeagueResponse(
         UUID id,
         String name,
         String description,

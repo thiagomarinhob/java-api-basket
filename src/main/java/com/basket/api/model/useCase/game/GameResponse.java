@@ -4,11 +4,11 @@ import com.basket.api.model.entity.GameStatus;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record GameResponseDTO(
+public record GameResponse(
         UUID id,
-        GameLeagueResponseDTO league,
-        GameTeamResponseDTO homeTeam,
-        GameTeamResponseDTO awayTeam,
+        GameLeagueResponse league,
+        GameTeamResponse homeTeam,
+        GameTeamResponse awayTeam,
         String venue,
         LocalDateTime scheduledDate,
         GameStatus status,

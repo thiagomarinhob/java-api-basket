@@ -2,9 +2,9 @@ package com.basket.api.web;
 
 import com.basket.api.model.useCase.teamCategory.DefaultAddTeamToCategoryUseCase;
 import com.basket.api.model.useCase.teamCategory.DefaultListTeamCategoryUseCase;
-import com.basket.api.model.useCase.teamCategory.ListCategoryDTO;
-import com.basket.api.model.useCase.teamCategory.TeamCategoryRequestDTO;
-import com.basket.api.model.useCase.teamCategory.TeamCategoryResponseDTO;
+import com.basket.api.model.useCase.teamCategory.ListCategoryResponse;
+import com.basket.api.model.useCase.teamCategory.TeamCategoryRequest;
+import com.basket.api.model.useCase.teamCategory.TeamCategoryResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -39,9 +39,9 @@ public class teamCategoryController {
             @ApiResponse(responseCode = "404", description = "Time ou categoria não encontrada"),
             @ApiResponse(responseCode = "409", description = "Time já possui esta categoria")
     })
-    public ResponseEntity<TeamCategoryResponseDTO> AddTeamToCategory(@PathVariable UUID teamId, @PathVariable UUID categoryId) {
-        TeamCategoryRequestDTO requestDTO = new TeamCategoryRequestDTO(teamId, categoryId);
-        var result = this.addTeamToCategoryUseCase.execute(requestDTO);
+    public ResponseEntity<TeamCategoryResponse> AddTeamToCategory(@PathVariable UUID teamId, @PathVariable UUID categoryId) {
+        TeamCategoryRequest request = new TeamCategoryRequest(teamId, categoryId);
+        var result = this.addTeamToCategoryUseCase.execute(request);
         return ResponseEntity.ok(result);
     }
 
@@ -51,8 +51,8 @@ public class teamCategoryController {
             @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
             @ApiResponse(responseCode = "404", description = "Time não encontrado")
     })
-    public ResponseEntity<List<ListCategoryDTO>> getTeam(@PathVariable UUID teamId) {
-        List<ListCategoryDTO> result = listTeamCategoryUseCase.execute(teamId);
+    public ResponseEntity<List<ListCategoryResponse>> getTeam(@PathVariable UUID teamId) {
+        List<ListCategoryResponse> result = listTeamCategoryUseCase.execute(teamId);
         return ResponseEntity.ok().body(result);
     }
 }

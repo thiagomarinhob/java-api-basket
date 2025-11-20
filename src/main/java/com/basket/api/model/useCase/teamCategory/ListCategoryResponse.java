@@ -4,7 +4,7 @@ import com.basket.api.model.entity.CategoryGender;
 
 import java.util.UUID;
 
-public record ListCategoryDTO(
+public record ListCategoryResponse(
         UUID id,
         String name,
         CategoryGender categoryGender

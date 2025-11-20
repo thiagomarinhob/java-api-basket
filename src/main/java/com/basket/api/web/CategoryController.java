@@ -1,6 +1,6 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.category.CategoryRequestDTO;
+import com.basket.api.model.useCase.category.CategoryRequest;
 import com.basket.api.model.entity.Category;
 import com.basket.api.model.useCase.category.CreateCategoryUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,8 +33,8 @@ public class CategoryController {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "409", description = "Categoria com este nome já existe")
     })
-    private ResponseEntity<Category> createCategory(@RequestBody CategoryRequestDTO categoryRequestDTO){
-        Category category = createCategoryUseCase.execute(categoryRequestDTO);
+    private ResponseEntity<Category> createCategory(@RequestBody CategoryRequest categoryRequest){
+        Category category = createCategoryUseCase.execute(categoryRequest);
         return ResponseEntity.ok(category);
     }
 }

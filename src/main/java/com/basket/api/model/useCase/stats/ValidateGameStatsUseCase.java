@@ -22,13 +22,13 @@ public class ValidateGameStatsUseCase {
         this.teamPlayerRepository = teamPlayerRepository;
     }
 
-    public void execute(UUID gameId, List<PlayerStatsRequestDTO> playerStatsList) {
+    public void execute(UUID gameId, List<PlayerStatsRequest> playerStatsList) {
         Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new ResourceNotFoundException("Jogo não encontrado com o ID: " + gameId));
 
         Category leagueCategory = game.getLeague().getCategory();
 
-        for (PlayerStatsRequestDTO statsDTO : playerStatsList) {
+        for (PlayerStatsRequest statsDTO : playerStatsList) {
             teamPlayerRepository.findByTeamIdAndPlayerIdAndCategoryIdAndIsActive(
                             statsDTO.teamId(), statsDTO.playerId(), leagueCategory.getId(), true)
                     .orElseThrow(() -> new BusinessRuleException(

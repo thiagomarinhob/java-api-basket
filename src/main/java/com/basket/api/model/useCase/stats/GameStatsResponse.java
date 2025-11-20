@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public record GameStatsResponseDTO(
+public record GameStatsResponse(
         UUID gameId,
         String homeTeamName,
         String awayTeamName,
@@ -13,5 +13,5 @@ public record GameStatsResponseDTO(
         Integer awayScore,
         LocalDateTime scheduledDate,
         GameStatus status,
-        List<PlayerStatsResponseDTO> playerStats
+        List<PlayerStatsResponse> playerStats
 ) {}

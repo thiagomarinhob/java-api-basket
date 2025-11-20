@@ -2,7 +2,7 @@ package com.basket.api.model.useCase.league;
 
 import java.util.UUID;
 
-public record ThreePointLeaderDTO(
+public record ThreePointLeaderResponse(
         int rank,
         UUID playerId,
         String playerName,

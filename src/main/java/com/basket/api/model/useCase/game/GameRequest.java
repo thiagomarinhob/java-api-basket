@@ -5,7 +5,7 @@ import com.basket.api.model.entity.GameStatus;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record GameRequestDTO(
+public record GameRequest(
         UUID leagueId,
         UUID homeTeamId,
         UUID awayTeamId,

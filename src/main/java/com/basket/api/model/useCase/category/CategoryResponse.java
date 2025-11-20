@@ -4,5 +4,5 @@ import com.basket.api.model.entity.CategoryGender;
 
 import java.util.UUID;
 
-public record CategoryResponseDTO(UUID id, String name, String description, CategoryGender categoryGender) {
+public record CategoryResponse(UUID id, String name, String description, CategoryGender categoryGender) {
 }

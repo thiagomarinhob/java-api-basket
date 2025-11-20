@@ -23,11 +23,11 @@ public class DefaultAddTeamToCategoryUseCase implements AddTeamToCategoryUseCase
 
     @Transactional
     @Override
-    public TeamCategoryResponseDTO execute(TeamCategoryRequestDTO teamCategoryRequestDTO) {
-        Team team = teamRepository.findById(teamCategoryRequestDTO.teamId())
+    public TeamCategoryResponse execute(TeamCategoryRequest teamCategoryRequest) {
+        Team team = teamRepository.findById(teamCategoryRequest.teamId())
                 .orElseThrow(() -> new ResourceNotFoundException("Time não existe"));
 
-        Category category = categoryRepository.findById(teamCategoryRequestDTO.categoryId())
+        Category category = categoryRepository.findById(teamCategoryRequest.categoryId())
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria não existe"));
 
         boolean exists = teamCategoryRepository.existsByTeamAndCategory(team, category);
@@ -41,7 +41,7 @@ public class DefaultAddTeamToCategoryUseCase implements AddTeamToCategoryUseCase
 
         TeamCategory savedEntity = teamCategoryRepository.save(teamCategory);
 
-        return new TeamCategoryResponseDTO(
+        return new TeamCategoryResponse(
                 savedEntity.getId(),
                 savedEntity.getTeam().getId(),
                 savedEntity.getCategory().getId(),

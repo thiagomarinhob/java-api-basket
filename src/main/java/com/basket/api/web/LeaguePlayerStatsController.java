@@ -1,7 +1,7 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.league.ThreePointLeaderDTO;
-import com.basket.api.model.useCase.league.TopScorerDTO;
+import com.basket.api.model.useCase.league.ThreePointLeaderResponse;
+import com.basket.api.model.useCase.league.TopScorerResponse;
 import com.basket.api.model.useCase.league.GetThreePointLeadersUseCase;
 import com.basket.api.model.useCase.league.GetTopScorersUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,21 +30,21 @@ public class LeaguePlayerStatsController {
     }
 
     @GetMapping("/top-scorers")
-    public ResponseEntity<List<TopScorerDTO>> getTopScorers(@PathVariable UUID leagueId) {
-        List<TopScorerDTO> topScorers = getTopScorersUseCase.execute(leagueId);
+    public ResponseEntity<List<TopScorerResponse>> getTopScorers(@PathVariable UUID leagueId) {
+        List<TopScorerResponse> topScorers = getTopScorersUseCase.execute(leagueId);
         return ResponseEntity.ok(topScorers);
     }
 
     @GetMapping("/three-point-leaders")
     @Operation(summary = "Busca o ranking de cestinhas de 3 pontos da liga (paginado)",
             description = "Retorna uma lista paginada dos jogadores com mais cestas de 3 pontos. Use os parâmetros 'page' (começando em 0) e 'size' para navegar.")
-    public ResponseEntity<Page<ThreePointLeaderDTO>> getThreePointLeaders(
+    public ResponseEntity<Page<ThreePointLeaderResponse>> getThreePointLeaders(
             @PathVariable UUID leagueId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
         PageRequest pageRequest = PageRequest.of(page, size);
-        Page<ThreePointLeaderDTO> threePointLeadersPage = getThreePointLeadersUseCase.execute(leagueId, pageRequest);
+        Page<ThreePointLeaderResponse> threePointLeadersPage = getThreePointLeadersUseCase.execute(leagueId, pageRequest);
         return ResponseEntity.ok(threePointLeadersPage);
     }
 }

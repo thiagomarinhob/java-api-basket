@@ -16,11 +16,11 @@ public class DefaultListTeamCategoryUseCase implements ListTeamCategoryUseCase {
     private final TeamCategoryRepository teamCategoryRepository;
 
     @Override
-    public List<ListCategoryDTO> execute(UUID teamId) {
+    public List<ListCategoryResponse> execute(UUID teamId) {
         List<TeamCategory> listTeamCategories = this.teamCategoryRepository.findByTeamId(teamId);
 
         return listTeamCategories.stream()
-                .map(teamCategory -> new ListCategoryDTO(
+                .map(teamCategory -> new ListCategoryResponse(
                         teamCategory.getCategory().getId(),
                         teamCategory.getCategory().getName(),
                         teamCategory.getCategory().getCategoryGender()
