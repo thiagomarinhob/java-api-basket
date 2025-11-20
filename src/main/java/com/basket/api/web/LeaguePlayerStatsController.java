@@ -1,9 +1,9 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.league.GetThreePointLeadersUseCase;
-import com.basket.api.model.useCase.league.GetTopScorersUseCase;
-import com.basket.api.model.useCase.league.ThreePointLeaderResponse;
-import com.basket.api.model.useCase.league.TopScorerResponse;
+import com.basket.api.domain.useCase.league.GetThreePointLeadersUseCase;
+import com.basket.api.domain.useCase.league.GetTopScorersUseCase;
+import com.basket.api.domain.useCase.league.ThreePointLeaderResponse;
+import com.basket.api.domain.useCase.league.TopScorerResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

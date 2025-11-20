@@ -1,8 +1,8 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.league.LeagueRequest;
-import com.basket.api.model.useCase.league.LeagueResponse;
-import com.basket.api.model.useCase.league.TeamStandingsResponse;
+import com.basket.api.domain.useCase.league.LeagueRequest;
+import com.basket.api.domain.useCase.league.LeagueResponse;
+import com.basket.api.domain.useCase.league.TeamStandingsResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

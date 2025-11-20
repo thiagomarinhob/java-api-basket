@@ -1,9 +1,9 @@
 package com.basket.api.web;
 
-import com.basket.api.model.entity.Team;
-import com.basket.api.model.useCase.team.CreateTeamUseCase;
-import com.basket.api.model.useCase.team.ListTeamUseCase;
-import com.basket.api.model.useCase.team.TeamResponse;
+import com.basket.api.domain.entity.Team;
+import com.basket.api.domain.useCase.team.CreateTeamUseCase;
+import com.basket.api.domain.useCase.team.ListTeamUseCase;
+import com.basket.api.domain.useCase.team.TeamResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

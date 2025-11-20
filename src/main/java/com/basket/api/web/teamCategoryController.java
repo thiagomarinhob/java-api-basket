@@ -1,10 +1,10 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.teamCategory.DefaultAddTeamToCategoryUseCase;
-import com.basket.api.model.useCase.teamCategory.DefaultListTeamCategoryUseCase;
-import com.basket.api.model.useCase.teamCategory.ListCategoryResponse;
-import com.basket.api.model.useCase.teamCategory.TeamCategoryRequest;
-import com.basket.api.model.useCase.teamCategory.TeamCategoryResponse;
+import com.basket.api.domain.useCase.teamCategory.DefaultAddTeamToCategoryUseCase;
+import com.basket.api.domain.useCase.teamCategory.DefaultListTeamCategoryUseCase;
+import com.basket.api.domain.useCase.teamCategory.ListCategoryResponse;
+import com.basket.api.domain.useCase.teamCategory.TeamCategoryRequest;
+import com.basket.api.domain.useCase.teamCategory.TeamCategoryResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.user.AuthUserRequest;
-import com.basket.api.model.useCase.user.AuthUserResponse;
+import com.basket.api.domain.useCase.user.AuthUserRequest;
+import com.basket.api.domain.useCase.user.AuthUserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

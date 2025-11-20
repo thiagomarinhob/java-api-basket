@@ -1,12 +1,12 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.league.CreateLeagueUseCase;
-import com.basket.api.model.useCase.league.GetLeagueByIdUseCase;
-import com.basket.api.model.useCase.league.GetLeagueStandingsUseCase;
-import com.basket.api.model.useCase.league.LeagueRequest;
-import com.basket.api.model.useCase.league.LeagueResponse;
-import com.basket.api.model.useCase.league.ListLeagueUseCase;
-import com.basket.api.model.useCase.league.TeamStandingsResponse;
+import com.basket.api.domain.useCase.league.CreateLeagueUseCase;
+import com.basket.api.domain.useCase.league.GetLeagueByIdUseCase;
+import com.basket.api.domain.useCase.league.GetLeagueStandingsUseCase;
+import com.basket.api.domain.useCase.league.LeagueRequest;
+import com.basket.api.domain.useCase.league.LeagueResponse;
+import com.basket.api.domain.useCase.league.ListLeagueUseCase;
+import com.basket.api.domain.useCase.league.TeamStandingsResponse;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

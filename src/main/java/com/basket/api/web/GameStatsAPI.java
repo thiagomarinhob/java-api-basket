@@ -1,8 +1,8 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.stats.GameStatsResponse;
-import com.basket.api.model.useCase.stats.PlayerStatsRequest;
-import com.basket.api.model.useCase.stats.PlayerStatsResponse;
+import com.basket.api.domain.useCase.stats.GameStatsResponse;
+import com.basket.api.domain.useCase.stats.PlayerStatsRequest;
+import com.basket.api.domain.useCase.stats.PlayerStatsResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

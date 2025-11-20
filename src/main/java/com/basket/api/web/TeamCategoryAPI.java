@@ -1,7 +1,7 @@
 package com.basket.api.web;
 
-import com.basket.api.model.useCase.teamCategory.ListCategoryResponse;
-import com.basket.api.model.useCase.teamCategory.TeamCategoryResponse;
+import com.basket.api.domain.useCase.teamCategory.ListCategoryResponse;
+import com.basket.api.domain.useCase.teamCategory.TeamCategoryResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

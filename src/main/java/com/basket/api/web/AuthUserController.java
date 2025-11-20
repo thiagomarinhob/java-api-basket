@@ -1,8 +1,8 @@
 package com.basket.api.web;
 
 
-import com.basket.api.model.useCase.user.AuthUserRequest;
-import com.basket.api.model.useCase.user.DefaultAuthUserUseCase;
+import com.basket.api.domain.useCase.user.AuthUserRequest;
+import com.basket.api.domain.useCase.user.DefaultAuthUserUseCase;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
