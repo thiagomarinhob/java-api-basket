@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/teams/{teamId}/categories")
-@Tag(name = "10. Associações (Time-Categoria)", description = "Endpoints para associar categorias a times")
+@Tag(name = "Associações (Time-Categoria)", description = "Endpoints para associar categorias a times")
 @SecurityRequirement(name = "bearer-key")
 public interface TeamCategoryAPI {
 

@@ -17,7 +17,7 @@ import javax.naming.AuthenticationException;
 
 @RestController
 @RequestMapping("/players")
-@Tag(name = "5. Jogadores", description = "Endpoints para gerenciamento de jogadores")
+@Tag(name = "Jogadores", description = "Endpoints para gerenciamento de jogadores")
 @SecurityRequirement(name = "bearer-key")
 public interface PlayerAPI {
 

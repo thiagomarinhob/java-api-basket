@@ -17,7 +17,7 @@ import javax.naming.AuthenticationException;
 
 @RestController
 @RequestMapping("/categories")
-@Tag(name = "6. Categorias", description = "Endpoints para gerenciamento de categorias de time")
+@Tag(name = "Categorias", description = "Endpoints para gerenciamento de categorias de time")
 @SecurityRequirement(name = "bearer-key")
 public interface CategoryAPI {
 
