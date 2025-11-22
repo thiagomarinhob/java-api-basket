@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/leagues/{leagueId}/teams")
-@Tag(name = "8. Associações (Liga-Time)", description = "Endpoints para associar times a ligas")
+@Tag(name = "Associações (Liga-Time)", description = "Endpoints para associar times a ligas")
 @SecurityRequirement(name = "bearer-key")
 public interface LeagueTeamAPI {
 

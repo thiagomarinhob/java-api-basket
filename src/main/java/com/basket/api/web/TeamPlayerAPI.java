@@ -22,7 +22,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/teams/{teamId}")
-@Tag(name = "9. Associações (Time-Jogador)", description = "Endpoints para associar jogadores a times")
+@Tag(name = "Associações (Time-Jogador)", description = "Endpoints para associar jogadores a times")
 @SecurityRequirement(name = "bearer-key")
 public interface TeamPlayerAPI {
 
