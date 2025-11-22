@@ -25,22 +25,17 @@ public class TeamPlayerController implements TeamPlayerAPI {
     private final DefaultListPlayersByTeamAndCategoryUseCase listPlayersByTeamAndCategoryUseCase;
 
     @Override
-    public ResponseEntity<TeamPlayerResponse> addPlayerToTeam(@PathVariable UUID teamId, @PathVariable UUID playerId, @PathVariable UUID categoryId) {
-        TeamPlayerRequest requestDTO = new TeamPlayerRequest(playerId, teamId, categoryId);
-        var result = this.addTeamPlayerUseCase.execute(requestDTO);
-        return ResponseEntity.ok(result);
+    public TeamPlayerResponse addPlayerToTeam(@PathVariable UUID teamId, @PathVariable UUID playerId, @PathVariable UUID categoryId) {
+        return addTeamPlayerUseCase.execute(new TeamPlayerRequest(playerId, teamId, categoryId));
     }
 
     @Override
-    public ResponseEntity<List<ListPlayersResponse>> listPlayerByTeam(@PathVariable UUID teamId) {
-        var result = listPlayerByTeamUseCase.execute(teamId);
-        return ResponseEntity.ok().body(result);
+    public List<ListPlayersResponse> listPlayerByTeam(@PathVariable UUID teamId) {
+        return listPlayerByTeamUseCase.execute(teamId);
     }
 
     @Override
-    public ResponseEntity<List<ListPlayersResponse>> listPlayerByTeamAndCategory(@PathVariable UUID teamId, @PathVariable UUID categoryId) {
-        var request = new ListPlayersByTeamAndCategoryRequest(teamId, categoryId);
-        var result = listPlayersByTeamAndCategoryUseCase.execute(request);
-        return ResponseEntity.ok().body(result);
+    public List<ListPlayersResponse> listPlayerByTeamAndCategory(@PathVariable UUID teamId, @PathVariable UUID categoryId) {
+        return listPlayersByTeamAndCategoryUseCase.execute(new ListPlayersByTeamAndCategoryRequest(teamId, categoryId));
     }
 }

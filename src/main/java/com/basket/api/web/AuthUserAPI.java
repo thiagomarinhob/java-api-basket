@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.naming.AuthenticationException;
+
 @Validated
 @RestController
 @RequestMapping("/auth")
@@ -29,5 +31,5 @@ public interface AuthUserAPI {
                     content = @Content(schema = @Schema(implementation = AuthUserResponse.class))),
             @ApiResponse(responseCode = "401", description = "Credenciais inválidas", content = @Content)
     })
-    ResponseEntity<Object> signIn(@Valid @RequestBody AuthUserRequest authUserRequest);
+    Object signIn(@Valid @RequestBody AuthUserRequest authUserRequest) throws AuthenticationException;
 }

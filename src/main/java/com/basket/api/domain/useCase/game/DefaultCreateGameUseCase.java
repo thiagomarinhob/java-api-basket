@@ -25,21 +25,21 @@ public class DefaultCreateGameUseCase implements CreateGameUseCase {
     private final LeagueTeamRepository leagueTeamRepository;
 
     @Override
-    public GameResponse execute(GameRequest gameRequest) {
-        League league = leagueRepository.findById(gameRequest.leagueId())
+    public GameResponse execute(final GameRequest gameRequest) {
+        final var league = leagueRepository.findById(gameRequest.leagueId())
                 .orElseThrow(() -> new ResourceNotFoundException("League not found"));
 
-        Team homeTeam = teamRepository.findById(gameRequest.homeTeamId())
+        final var homeTeam = teamRepository.findById(gameRequest.homeTeamId())
                 .orElseThrow(() -> new ResourceNotFoundException("Home team not found"));
 
-        Team awayTeam = teamRepository.findById(gameRequest.awayTeamId())
+        final var awayTeam = teamRepository.findById(gameRequest.awayTeamId())
                 .orElseThrow(() -> new ResourceNotFoundException("Away team not found"));
 
         if (homeTeam.equals(awayTeam)) {
             throw new BusinessRuleException("Home team and away team cannot be the same");
         }
 
-        Category leagueCategory = league.getCategory();
+        final var leagueCategory = league.getCategory();
 
         boolean homeTeamInCategory = homeTeam.getCategoryEntityList().stream()
                 .anyMatch(teamCategory -> teamCategory.getCategory().getId().equals(leagueCategory.getId()));
@@ -74,16 +74,16 @@ public class DefaultCreateGameUseCase implements CreateGameUseCase {
 
         Game savedGame = gameRepository.save(game);
 
-        return new GameResponse(
-                savedGame.getId(),
-                new GameLeagueResponse(savedGame.getLeague().getId(), savedGame.getLeague().getName()),
-                new GameTeamResponse(savedGame.getHomeTeam().getId(), savedGame.getHomeTeam().getName(), savedGame.getHomeTeam().getLogoUrl()),
-                new GameTeamResponse(savedGame.getAwayTeam().getId(), savedGame.getAwayTeam().getName(), savedGame.getAwayTeam().getLogoUrl()),
-                savedGame.getVenue(),
-                savedGame.getScheduledDate(),
-                savedGame.getStatus(),
-                savedGame.getHomeScore(),
-                savedGame.getAwayScore()
-        );
+        return GameResponse.builder()
+                .id(savedGame.getId())
+                .venue(savedGame.getVenue())
+                .scheduledDate(savedGame.getScheduledDate())
+                .status(savedGame.getStatus())
+                .league(new GameLeagueResponse(savedGame.getLeague().getId(), savedGame.getLeague().getName()))
+                .homeTeam(new GameTeamResponse(savedGame.getHomeTeam().getId(), savedGame.getHomeTeam().getName(), savedGame.getHomeTeam().getLogoUrl()))
+                .awayTeam(new GameTeamResponse(savedGame.getAwayTeam().getId(), savedGame.getAwayTeam().getName(), savedGame.getAwayTeam().getLogoUrl()))
+                .homeScore(savedGame.getHomeScore())
+                .awayScore(savedGame.getAwayScore())
+                .build();
     }
 }

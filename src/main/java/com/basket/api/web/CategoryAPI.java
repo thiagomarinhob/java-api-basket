@@ -28,6 +28,6 @@ public interface CategoryAPI {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "409", description = "Categoria com este nome já existe")
     })
-    ResponseEntity<Category> createCategory(@RequestBody CategoryRequest categoryRequest) throws AuthenticationException;
+    Category createCategory(@RequestBody CategoryRequest categoryRequest) throws AuthenticationException;
 }
 

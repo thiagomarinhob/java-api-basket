@@ -18,8 +18,7 @@ public class PlayerController implements PlayerAPI {
     private final CreatePlayerUseCase createPlayerUseCase;
 
     @Override
-    public ResponseEntity<Object> create(@Valid @RequestBody Player player) throws AuthenticationException {
-        var result = createPlayerUseCase.execute(player);
-        return ResponseEntity.ok().body(result);
+    public Object create(@Valid @RequestBody Player player) throws AuthenticationException {
+        return createPlayerUseCase.execute(player);
     }
 }

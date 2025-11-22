@@ -19,15 +19,15 @@ public class DefaultCreateLeagueUseCase implements CreateLeagueUseCase {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public League execute(LeagueRequest leagueRequest) {
+    public LeagueResponse execute(LeagueRequest leagueRequest) {
         if (leagueRepository.findByName(leagueRequest.name()).isPresent()) {
             throw new BusinessRuleException("League with name '" + leagueRequest.name() + "' already exists.");
         }
 
-        var user = userRepository.findById(leagueRequest.userId())
+        final var user = userRepository.findById(leagueRequest.userId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        var category = categoryRepository.findById(leagueRequest.categoryId())
+        final var category = categoryRepository.findById(leagueRequest.categoryId())
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada"));
 
         League league = new League();
@@ -38,6 +38,11 @@ public class DefaultCreateLeagueUseCase implements CreateLeagueUseCase {
         league.setUser(user);
         league.setCategory(category);
 
-        return leagueRepository.save(league);
+        final var saveLeague = leagueRepository.save(league);
+
+        return LeagueResponse.builder()
+                .name(saveLeague.getName())
+                .description(saveLeague.getDescription())
+                .build();
     }
 }

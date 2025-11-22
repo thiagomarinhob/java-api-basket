@@ -25,19 +25,15 @@ public class LeaguePlayerStatsController implements LeaguePlayerStatsAPI {
     private final GetThreePointLeadersUseCase getThreePointLeadersUseCase;
 
     @Override
-    public ResponseEntity<List<TopScorerResponse>> getTopScorers(@PathVariable UUID leagueId) throws AuthenticationException {
-        List<TopScorerResponse> topScorers = getTopScorersUseCase.execute(leagueId);
-        return ResponseEntity.ok(topScorers);
+    public List<TopScorerResponse> getTopScorers(@PathVariable UUID leagueId) throws AuthenticationException {
+       return getTopScorersUseCase.execute(leagueId);
     }
 
     @Override
-    public ResponseEntity<Page<ThreePointLeaderResponse>> getThreePointLeaders(
+    public Page<ThreePointLeaderResponse> getThreePointLeaders(
             @PathVariable UUID leagueId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-
-        PageRequest pageRequest = PageRequest.of(page, size);
-        Page<ThreePointLeaderResponse> threePointLeadersPage = getThreePointLeadersUseCase.execute(leagueId, pageRequest);
-        return ResponseEntity.ok(threePointLeadersPage);
+        return getThreePointLeadersUseCase.execute(leagueId, PageRequest.of(page, size));
     }
 }

@@ -34,7 +34,7 @@ public interface TeamPlayerAPI {
             @ApiResponse(responseCode = "404", description = "Time ou jogador não encontrado"),
             @ApiResponse(responseCode = "409", description = "Jogador já pertence a este time")
     })
-    ResponseEntity<TeamPlayerResponse> addPlayerToTeam(@PathVariable UUID teamId, @PathVariable UUID playerId, @PathVariable UUID categoryId);
+    TeamPlayerResponse addPlayerToTeam(@PathVariable UUID teamId, @PathVariable UUID playerId, @PathVariable UUID categoryId);
 
     @GetMapping("/players")
     @Operation(summary = "Lista os jogadores de um time", description = "Retorna uma lista com todos os jogadores ativos associados a um time específico.")
@@ -42,7 +42,7 @@ public interface TeamPlayerAPI {
             @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
             @ApiResponse(responseCode = "404", description = "Time não encontrado")
     })
-    ResponseEntity<List<ListPlayersResponse>> listPlayerByTeam(@PathVariable UUID teamId);
+    List<ListPlayersResponse> listPlayerByTeam(@PathVariable UUID teamId);
 
     @GetMapping("/category/{categoryId}/players")
     @Operation(summary = "Lista os jogadores de uma equipe específica (time e categoria)", description = "Retorna uma lista com todos os jogadores ativos associados a um time e com a mesma categoria.")
@@ -54,6 +54,6 @@ public interface TeamPlayerAPI {
             @ApiResponse(responseCode = "404", description = "Time ou Categoria não encontrada. Ocorre se o ID do time ou o ID da categoria não existir no sistema.",
                     content = @Content)
     })
-    ResponseEntity<List<ListPlayersResponse>> listPlayerByTeamAndCategory(@PathVariable UUID teamId, @PathVariable UUID categoryId);
+    List<ListPlayersResponse> listPlayerByTeamAndCategory(@PathVariable UUID teamId, @PathVariable UUID categoryId);
 }
 

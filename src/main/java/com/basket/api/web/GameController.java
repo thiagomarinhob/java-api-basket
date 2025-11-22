@@ -1,12 +1,8 @@
 package com.basket.api.web;
 
-import com.basket.api.domain.useCase.game.CreateGameUseCase;
-import com.basket.api.domain.useCase.game.GameRequest;
-import com.basket.api.domain.useCase.game.GameResponse;
-import com.basket.api.domain.useCase.game.ListGameByLeagueIdUseCase;
+import com.basket.api.domain.useCase.game.*;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,16 +17,26 @@ public class GameController implements GameAPI {
 
     private final CreateGameUseCase createGameUseCase;
     private final ListGameByLeagueIdUseCase listGameByLeagueIdUseCase;
+    private final StartGameUseCase startGameUseCase;
+    private final FinishGameUseCase finishGameUseCase;
 
     @Override
-    public ResponseEntity<GameResponse> createGame(@RequestBody GameRequest gameRequest) throws AuthenticationException {
-        GameResponse game = createGameUseCase.execute(gameRequest);
-        return ResponseEntity.ok(game);
+    public GameResponse createGame(@RequestBody GameRequest gameRequest) throws AuthenticationException {
+        return createGameUseCase.execute(gameRequest);
     }
 
     @Override
-    public ResponseEntity<List<GameResponse>> listGamesByLeague(@PathVariable UUID leagueId) throws AuthenticationException {
-        List<GameResponse> list = listGameByLeagueIdUseCase.execute(leagueId);
-        return ResponseEntity.ok(list);
+    public List<GameResponse> listGamesByLeague(@PathVariable UUID leagueId) throws AuthenticationException {
+        return listGameByLeagueIdUseCase.execute(leagueId);
+    }
+
+    @Override
+    public GameResponse startGame(@PathVariable UUID id) throws AuthenticationException {
+        return startGameUseCase.execute(id);
+    }
+
+    @Override
+    public GameResponse finishGame(@PathVariable UUID id) throws AuthenticationException {
+        return finishGameUseCase.execute(id);
     }
 }

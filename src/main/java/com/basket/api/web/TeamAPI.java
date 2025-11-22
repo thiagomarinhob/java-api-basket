@@ -32,7 +32,7 @@ public interface TeamAPI {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "409", description = "Time com este nome já existe")
     })
-    ResponseEntity<Object> createTeam(@Valid @RequestBody Team team) throws AuthenticationException;
+    Object createTeam(@Valid @RequestBody Team team) throws AuthenticationException;
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca um time pelo ID", description = "Retorna os detalhes de um time específico, incluindo suas categorias.")
@@ -40,6 +40,6 @@ public interface TeamAPI {
             @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
             @ApiResponse(responseCode = "404", description = "Time não encontrado")
     })
-    ResponseEntity<TeamResponse> getTeam(@PathVariable UUID id) throws AuthenticationException;
+    TeamResponse getTeam(@PathVariable UUID id) throws AuthenticationException;
 }
 

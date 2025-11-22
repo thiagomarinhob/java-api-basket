@@ -21,15 +21,12 @@ public class LeagueTeamController implements LeagueTeamAPI {
     private final DefaultListLeagueTeamsUseCase listLeagueTeamsUseCase;
 
     @Override
-    public ResponseEntity<Object> addTeamToLeague(@PathVariable UUID leagueId, @PathVariable UUID teamId) {
-        var request = new AddTeamToLeagueRequest(leagueId, teamId);
-        var result = this.addTeamToLeagueUseCase.execute(request);
-        return ResponseEntity.ok().body(result);
+    public Object addTeamToLeague(@PathVariable UUID leagueId, @PathVariable UUID teamId) {
+        return addTeamToLeagueUseCase.execute(new AddTeamToLeagueRequest(leagueId, teamId));
     }
 
     @Override
-    public ResponseEntity<List<ListTeamResponse>> getTeam(@PathVariable UUID leagueId) {
-        List<ListTeamResponse> result = listLeagueTeamsUseCase.execute(leagueId);
-        return ResponseEntity.ok().body(result);
+    public List<ListTeamResponse> getTeam(@PathVariable UUID leagueId) {
+        return listLeagueTeamsUseCase.execute(leagueId);
     }
 }

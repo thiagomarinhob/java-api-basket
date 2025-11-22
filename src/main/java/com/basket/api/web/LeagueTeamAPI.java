@@ -30,7 +30,7 @@ public interface LeagueTeamAPI {
             @ApiResponse(responseCode = "404", description = "Liga ou time não encontrado"),
             @ApiResponse(responseCode = "409", description = "Time já pertence a esta liga")
     })
-    ResponseEntity<Object> addTeamToLeague(@PathVariable UUID leagueId, @PathVariable UUID teamId);
+    Object addTeamToLeague(@PathVariable UUID leagueId, @PathVariable UUID teamId);
 
     @GetMapping
     @Operation(summary = "Lista os times de uma liga", description = "Retorna uma lista com todos os times associados a uma liga específica.")
@@ -38,6 +38,6 @@ public interface LeagueTeamAPI {
             @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
             @ApiResponse(responseCode = "404", description = "Liga não encontrada")
     })
-    ResponseEntity<List<ListTeamResponse>> getTeam(@PathVariable UUID leagueId);
+    List<ListTeamResponse> getTeam(@PathVariable UUID leagueId);
 }
 

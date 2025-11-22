@@ -34,7 +34,7 @@ public interface LeagueAPI {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "409", description = "Liga com este nome já existe")
     })
-    ResponseEntity<Object> createLeague(@Valid @RequestBody LeagueRequest leagueRequest) throws AuthenticationException;
+    LeagueResponse createLeague(@Valid @RequestBody LeagueRequest leagueRequest) throws AuthenticationException;
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca uma liga pelo ID", description = "Retorna os detalhes de uma liga específica.")
@@ -42,15 +42,15 @@ public interface LeagueAPI {
             @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
             @ApiResponse(responseCode = "404", description = "Liga não encontrada")
     })
-    ResponseEntity<LeagueResponse> getLeague(@PathVariable UUID id) throws AuthenticationException;
+    LeagueResponse getLeague(@PathVariable UUID id) throws AuthenticationException;
 
     @GetMapping
     @Operation(summary = "Busca todas as ligas", description = "Retorna todas as ligas cadastradas")
-    ResponseEntity<List<LeagueResponse>> getAllLeagues();
+    List<LeagueResponse> getAllLeagues();
 
     @GetMapping("/{leagueId}/standings")
     @Operation(summary = "Busca a tabela de classificação de uma liga",
             description = "Retorna uma lista ordenada de times com suas respectivas estatísticas (pontos, vitórias, saldo, etc.)")
-    ResponseEntity<List<TeamStandingsResponse>> getStandings(@PathVariable UUID leagueId) throws AuthenticationException;
+    List<TeamStandingsResponse> getStandings(@PathVariable UUID leagueId) throws AuthenticationException;
 }
 

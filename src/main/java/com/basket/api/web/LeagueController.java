@@ -29,27 +29,23 @@ public class LeagueController implements LeagueAPI {
     private final GetLeagueStandingsUseCase getLeagueStandingsUseCase;
 
     @Override
-    public ResponseEntity<Object> createLeague(@Valid @RequestBody LeagueRequest leagueRequest) throws AuthenticationException {
-        var result = this.createLeagueUseCase.execute(leagueRequest);
-        return ResponseEntity.ok().body(result);
+    public LeagueResponse createLeague(@Valid @RequestBody LeagueRequest leagueRequest) throws AuthenticationException {
+        return createLeagueUseCase.execute(leagueRequest);
     }
 
     @Override
-    public ResponseEntity<LeagueResponse> getLeague(@PathVariable UUID id) throws AuthenticationException {
-        LeagueResponse leagueResponse = getLeagueByIdUseCase.execute(id);
-        return ResponseEntity.ok(leagueResponse);
+    public LeagueResponse getLeague(@PathVariable UUID id) throws AuthenticationException {
+        return getLeagueByIdUseCase.execute(id);
     }
 
     @Override
-    public ResponseEntity<List<LeagueResponse>> getAllLeagues() {
-        var leagues = this.listLeaguesUseCase.execute();
-        return ResponseEntity.ok(leagues);
+    public List<LeagueResponse> getAllLeagues() {
+        return listLeaguesUseCase.execute();
     }
 
     @Override
-    public ResponseEntity<List<TeamStandingsResponse>> getStandings(@PathVariable UUID leagueId) throws AuthenticationException {
-        List<TeamStandingsResponse> standings = getLeagueStandingsUseCase.execute(leagueId);
-        return ResponseEntity.ok(standings);
+    public List<TeamStandingsResponse> getStandings(@PathVariable UUID leagueId) throws AuthenticationException {
+        return getLeagueStandingsUseCase.execute(leagueId);
     }
 
 }

@@ -24,14 +24,12 @@ public class TeamController implements TeamAPI {
     private final ListTeamUseCase listTeamUseCase;
 
     @Override
-    public ResponseEntity<Object> createTeam(@Valid @RequestBody Team team) throws AuthenticationException {
-        var result = this.createTeamUseCase.execute(team);
-        return ResponseEntity.ok().body(result);
+    public Object createTeam(@Valid @RequestBody Team team) throws AuthenticationException {
+        return createTeamUseCase.execute(team);
     }
 
     @Override
-    public ResponseEntity<TeamResponse> getTeam(@PathVariable UUID id) throws AuthenticationException {
-        var result = this.listTeamUseCase.execute(id);
-        return ResponseEntity.ok().body(result);
+    public TeamResponse getTeam(@PathVariable UUID id) throws AuthenticationException {
+        return listTeamUseCase.execute(id);
     }
 }

@@ -22,15 +22,13 @@ public class teamCategoryController implements TeamCategoryAPI {
     private final DefaultListTeamCategoryUseCase listTeamCategoryUseCase;
 
     @Override
-    public ResponseEntity<TeamCategoryResponse> addTeamToCategory(@PathVariable UUID teamId, @PathVariable UUID categoryId) {
+    public TeamCategoryResponse addTeamToCategory(@PathVariable UUID teamId, @PathVariable UUID categoryId) {
         TeamCategoryRequest request = new TeamCategoryRequest(teamId, categoryId);
-        var result = this.addTeamToCategoryUseCase.execute(request);
-        return ResponseEntity.ok(result);
+        return addTeamToCategoryUseCase.execute(request);
     }
 
     @Override
-    public ResponseEntity<List<ListCategoryResponse>> getTeam(@PathVariable UUID teamId) {
-        List<ListCategoryResponse> result = listTeamCategoryUseCase.execute(teamId);
-        return ResponseEntity.ok().body(result);
+    public List<ListCategoryResponse> getTeam(@PathVariable UUID teamId) {
+        return listTeamCategoryUseCase.execute(teamId);
     }
 }

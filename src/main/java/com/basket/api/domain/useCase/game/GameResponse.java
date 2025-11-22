@@ -1,9 +1,12 @@
 package com.basket.api.domain.useCase.game;
 
 import com.basket.api.domain.entity.GameStatus;
+import lombok.Builder;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Builder
 public record GameResponse(
         UUID id,
         GameLeagueResponse league,

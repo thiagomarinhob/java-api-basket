@@ -26,6 +26,6 @@ public interface UserAPI {
             @ApiResponse(responseCode = "200", description = "Usuário criado com sucesso", content = @Content(schema = @Schema(implementation = User.class))),
             @ApiResponse(responseCode = "409", description = "Email já existente", content = @Content)
     })
-    ResponseEntity<Object> createUser(@Valid @RequestBody CreateUserRequest user);
+    Object createUser(@Valid @RequestBody CreateUserRequest user);
 }
 

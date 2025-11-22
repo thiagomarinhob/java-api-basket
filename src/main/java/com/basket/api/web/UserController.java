@@ -16,8 +16,7 @@ public class UserController implements UserAPI {
     private final DefaultCreateUserUseCase defaultCreateUserUseCase;
 
     @Override
-    public ResponseEntity<Object> createUser(@Valid @RequestBody CreateUserRequest in) {
-        var result = this.defaultCreateUserUseCase.execute(in);
-        return ResponseEntity.ok().body(result);
+    public Object createUser(@Valid @RequestBody CreateUserRequest in) {
+        return defaultCreateUserUseCase.execute(in);
     }
 }

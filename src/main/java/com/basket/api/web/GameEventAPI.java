@@ -15,6 +15,6 @@ import javax.naming.AuthenticationException;
 public interface GameEventAPI {
 
     @PostMapping
-    ResponseEntity<GameEvent> createGameEvent(@RequestBody GameEventRequest request) throws AuthenticationException;
+    GameEvent createGameEvent(@RequestBody GameEventRequest request) throws AuthenticationException;
 }
 

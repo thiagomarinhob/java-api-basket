@@ -18,8 +18,7 @@ public class GameEventController implements GameEventAPI {
     private final AddGameEventUseCase addGameEventUseCase;
 
     @Override
-    public ResponseEntity<GameEvent> createGameEvent(@RequestBody GameEventRequest request) throws AuthenticationException {
-        GameEvent event = addGameEventUseCase.execute(request);
-        return ResponseEntity.ok(event);
+    public GameEvent createGameEvent(@RequestBody GameEventRequest request) throws AuthenticationException {
+        return addGameEventUseCase.execute(request);
     }
 }

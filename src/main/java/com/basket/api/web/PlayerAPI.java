@@ -28,6 +28,6 @@ public interface PlayerAPI {
             @ApiResponse(responseCode = "403", description = "Acesso negado"),
             @ApiResponse(responseCode = "409", description = "Jogador com este documento já existe")
     })
-    ResponseEntity<Object> create(@Valid @RequestBody Player player) throws AuthenticationException;
+    Object create(@Valid @RequestBody Player player) throws AuthenticationException;
 }
 

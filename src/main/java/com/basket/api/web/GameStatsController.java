@@ -26,25 +26,22 @@ public class GameStatsController implements GameStatsAPI {
     private final GetPlayerStatsInGameUseCase getPlayerStatsInGameUseCase;
 
     @Override
-    public ResponseEntity<Void> recordGameStats(
+    public void recordGameStats(
             @PathVariable UUID gameId,
             @RequestBody List<PlayerStatsRequest> playerStatsList) {
 
-        recordGameStatsUseCase.execute(gameId, playerStatsList);
-        return ResponseEntity.ok().build();
+       recordGameStatsUseCase.execute(gameId, playerStatsList);
     }
 
     @Override
-    public ResponseEntity<GameStatsResponse> getGameStats(@PathVariable UUID gameId) throws AuthenticationException {
-        GameStatsResponse response = getGameStatsUseCase.execute(gameId);
-        return ResponseEntity.ok(response);
+    public GameStatsResponse getGameStats(@PathVariable UUID gameId) throws AuthenticationException {
+        return getGameStatsUseCase.execute(gameId);
     }
 
     @Override
-    public ResponseEntity<PlayerStatsResponse> getPlayerStatsInGame(
+    public PlayerStatsResponse getPlayerStatsInGame(
             @PathVariable UUID gameId,
             @PathVariable UUID playerId) {
-        PlayerStatsResponse response = getPlayerStatsInGameUseCase.execute(gameId, playerId);
-        return ResponseEntity.ok(response);
+        return getPlayerStatsInGameUseCase.execute(gameId, playerId);
     }
 }

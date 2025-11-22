@@ -24,12 +24,12 @@ import java.util.UUID;
 public interface LeaguePlayerStatsAPI {
 
     @GetMapping("/top-scorers")
-    ResponseEntity<List<TopScorerResponse>> getTopScorers(@PathVariable UUID leagueId) throws AuthenticationException;
+    List<TopScorerResponse> getTopScorers(@PathVariable UUID leagueId) throws AuthenticationException;
 
     @GetMapping("/three-point-leaders")
     @Operation(summary = "Busca o ranking de cestinhas de 3 pontos da liga (paginado)",
             description = "Retorna uma lista paginada dos jogadores com mais cestas de 3 pontos. Use os parâmetros 'page' (começando em 0) e 'size' para navegar.")
-    ResponseEntity<Page<ThreePointLeaderResponse>> getThreePointLeaders(
+    Page<ThreePointLeaderResponse> getThreePointLeaders(
             @PathVariable UUID leagueId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size);

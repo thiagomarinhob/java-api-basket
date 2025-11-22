@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.naming.AuthenticationException;
+
 @RestController
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class AuthUserController implements AuthUserAPI {
@@ -20,12 +22,7 @@ public class AuthUserController implements AuthUserAPI {
 
 
     @Override
-    public ResponseEntity<Object> signIn(@Valid @RequestBody AuthUserRequest authUserRequest) {
-        try {
-            var token = this.defaultAuthUserUseCase.execute(authUserRequest);
-            return ResponseEntity.ok().body(token);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
-        }
+    public Object signIn(@Valid @RequestBody AuthUserRequest authUserRequest) throws AuthenticationException {
+        return defaultAuthUserUseCase.execute(authUserRequest);
     }
 }

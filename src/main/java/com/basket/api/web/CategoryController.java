@@ -18,8 +18,7 @@ public class CategoryController implements CategoryAPI {
     private final CreateCategoryUseCase createCategoryUseCase;
 
     @Override
-    public ResponseEntity<Category> createCategory(@RequestBody CategoryRequest categoryRequest) throws AuthenticationException {
-        Category category = createCategoryUseCase.execute(categoryRequest);
-        return ResponseEntity.ok(category);
+    public Category createCategory(@RequestBody CategoryRequest categoryRequest) throws AuthenticationException {
+        return createCategoryUseCase.execute(categoryRequest);
     }
 }

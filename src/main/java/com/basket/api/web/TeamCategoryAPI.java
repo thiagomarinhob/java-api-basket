@@ -31,7 +31,7 @@ public interface TeamCategoryAPI {
             @ApiResponse(responseCode = "404", description = "Time ou categoria não encontrada"),
             @ApiResponse(responseCode = "409", description = "Time já possui esta categoria")
     })
-    ResponseEntity<TeamCategoryResponse> addTeamToCategory(@PathVariable UUID teamId, @PathVariable UUID categoryId);
+    TeamCategoryResponse addTeamToCategory(@PathVariable UUID teamId, @PathVariable UUID categoryId);
 
     @GetMapping
     @Operation(summary = "Lista as categorias de um time", description = "Retorna uma lista com todas as categorias associadas a um time específico.")
@@ -39,6 +39,6 @@ public interface TeamCategoryAPI {
             @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
             @ApiResponse(responseCode = "404", description = "Time não encontrado")
     })
-    ResponseEntity<List<ListCategoryResponse>> getTeam(@PathVariable UUID teamId);
+    List<ListCategoryResponse> getTeam(@PathVariable UUID teamId);
 }
 

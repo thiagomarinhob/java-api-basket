@@ -27,19 +27,19 @@ public interface GameStatsAPI {
     @PostMapping("/{gameId}/stats")
     @Operation(summary = "Registra as estatísticas de todos os jogadores de uma partida",
             description = "Ao final de um jogo, submete uma lista com as estatísticas consolidadas de cada jogador. O sistema irá calcular o placar final e marcar a partida como 'COMPLETED'.")
-    ResponseEntity<Void> recordGameStats(
+    void recordGameStats(
             @PathVariable UUID gameId,
             @RequestBody List<PlayerStatsRequest> playerStatsList);
 
     @GetMapping("/{gameId}/stats")
     @Operation(summary = "Busca as estatísticas completas de uma partida",
             description = "Retorna o placar final e a lista de estatísticas individuais de cada jogador que participou da partida.")
-    ResponseEntity<GameStatsResponse> getGameStats(@PathVariable UUID gameId) throws AuthenticationException;
+    GameStatsResponse getGameStats(@PathVariable UUID gameId) throws AuthenticationException;
 
     @GetMapping("/{gameId}/players/{playerId}/stats")
     @Operation(summary = "Busca as estatísticas de um jogador específico em uma partida",
             description = "Retorna as estatísticas detalhadas de um único jogador para uma partida específica.")
-    ResponseEntity<PlayerStatsResponse> getPlayerStatsInGame(
+    PlayerStatsResponse getPlayerStatsInGame(
             @PathVariable UUID gameId,
             @PathVariable UUID playerId);
 }
