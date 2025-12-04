@@ -29,6 +29,7 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/users").permitAll()
                             .requestMatchers("/auth/**").permitAll()
@@ -47,12 +48,16 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Defina aqui a URL do seu frontend. Para desenvolvimento, localhost é comum.
-        configuration.setAllowedOrigins(List.of("http://localhost:*"));
+        // Permite qualquer porta do localhost para desenvolvimento
+        configuration.setAllowedOriginPatterns(List.of("http://localhost:*", "http://127.0.0.1:*"));
         // Permite os métodos HTTP mais comuns
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         // Permite headers comuns, incluindo o de Autorização para o JWT
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
+        // Permite credenciais (cookies, authorization headers, etc)
+        configuration.setAllowCredentials(true);
+        // Permite que o navegador exponha os headers de resposta
+        configuration.setExposedHeaders(Arrays.asList("Authorization"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         // Aplica a configuração a todas as rotas da sua API
         source.registerCorsConfiguration("/**", configuration);

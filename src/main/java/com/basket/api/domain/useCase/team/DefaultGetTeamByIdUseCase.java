@@ -1,30 +1,27 @@
 package com.basket.api.domain.useCase.team;
 
+import com.basket.api.exception.ResourceNotFoundException;
 import com.basket.api.domain.useCase.category.CategoryResponse;
 import com.basket.api.domain.entity.Team;
 import com.basket.api.domain.repository.TeamRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class DefaultListTeamUseCase implements ListTeamUseCase {
+public class DefaultGetTeamByIdUseCase implements GetTeamByIdUseCase {
 
     private final TeamRepository teamRepository;
 
     @Override
-    public Page<TeamResponse> execute(PageRequest pageRequest) {
-        Page<Team> teamsPage = teamRepository.findAll(pageRequest);
+    public TeamResponse execute(UUID id) {
+        Team team = teamRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Team not found with ID: " + id));
 
-        return teamsPage.map(this::convertToResponse);
-    }
-
-    private TeamResponse convertToResponse(Team team) {
         List<CategoryResponse> categoryResponses = team.getCategoryEntityList()
                 .stream()
                 .map(category -> new CategoryResponse(

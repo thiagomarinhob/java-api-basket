@@ -1,8 +1,8 @@
 package com.basket.api.domain.useCase.team;
 
-import com.basket.api.domain.useCase.UseCase;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
-import java.util.UUID;
-
-public interface ListTeamUseCase extends UseCase<UUID, TeamResponse> {
+public interface ListTeamUseCase {
+    Page<TeamResponse> execute(PageRequest pageRequest);
 }
