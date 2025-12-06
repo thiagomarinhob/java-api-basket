@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,5 +40,14 @@ public interface LeagueTeamAPI {
             @ApiResponse(responseCode = "404", description = "Liga não encontrada")
     })
     ResponseEntity<List<ListTeamResponse>> getTeam(@PathVariable UUID leagueId);
+
+    @DeleteMapping("/{teamId}")
+    @Operation(summary = "Remove um time de uma liga", description = "Remove a associação entre um time e uma liga. Requer autenticação de ADMIN.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Time removido da liga com sucesso"),
+            @ApiResponse(responseCode = "403", description = "Acesso negado"),
+            @ApiResponse(responseCode = "404", description = "Liga, time ou associação não encontrada")
+    })
+    ResponseEntity<Void> removeTeamFromLeague(@PathVariable UUID leagueId, @PathVariable UUID teamId);
 }
 

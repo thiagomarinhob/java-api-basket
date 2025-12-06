@@ -11,5 +11,6 @@ import java.util.UUID;
 public interface TeamCategoryRepository extends JpaRepository<TeamCategory, UUID> {
     boolean existsByTeamAndCategory(Team team, Category category);
     List<TeamCategory> findByTeamId(UUID teamId);
+    List<TeamCategory> findByCategoryId(UUID categoryId);
 
 }

@@ -3,6 +3,7 @@ package com.basket.api.web;
 import com.basket.api.domain.useCase.leagueTeam.AddTeamToLeagueRequest;
 import com.basket.api.domain.useCase.leagueTeam.DefaultAddTeamToLeagueUseCase;
 import com.basket.api.domain.useCase.leagueTeam.DefaultListLeagueTeamsUseCase;
+import com.basket.api.domain.useCase.leagueTeam.DefaultRemoveTeamFromLeagueUseCase;
 import com.basket.api.domain.useCase.leagueTeam.ListTeamResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class LeagueTeamController implements LeagueTeamAPI {
 
     private final DefaultAddTeamToLeagueUseCase addTeamToLeagueUseCase;
     private final DefaultListLeagueTeamsUseCase listLeagueTeamsUseCase;
+    private final DefaultRemoveTeamFromLeagueUseCase removeTeamFromLeagueUseCase;
 
     @Override
     public ResponseEntity<Object> addTeamToLeague(@PathVariable UUID leagueId, @PathVariable UUID teamId) {
@@ -31,5 +33,12 @@ public class LeagueTeamController implements LeagueTeamAPI {
     public ResponseEntity<List<ListTeamResponse>> getTeam(@PathVariable UUID leagueId) {
         List<ListTeamResponse> result = listLeagueTeamsUseCase.execute(leagueId);
         return ResponseEntity.ok().body(result);
+    }
+
+    @Override
+    public ResponseEntity<Void> removeTeamFromLeague(@PathVariable UUID leagueId, @PathVariable UUID teamId) {
+        var request = new AddTeamToLeagueRequest(leagueId, teamId);
+        this.removeTeamFromLeagueUseCase.execute(request);
+        return ResponseEntity.ok().build();
     }
 }

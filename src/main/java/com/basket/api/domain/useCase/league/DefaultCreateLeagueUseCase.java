@@ -30,10 +30,28 @@ public class DefaultCreateLeagueUseCase implements CreateLeagueUseCase {
         var category = categoryRepository.findById(leagueRequest.categoryId())
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada"));
 
+        // Validações de quantidade de times
+        Integer minTeams = leagueRequest.minTeams();
+        Integer maxTeams = leagueRequest.maxTeams();
+        
+        if (minTeams != null && minTeams < 0) {
+            throw new BusinessRuleException("A quantidade mínima de times não pode ser negativa.");
+        }
+        
+        if (maxTeams != null && maxTeams < 0) {
+            throw new BusinessRuleException("A quantidade máxima de times não pode ser negativa.");
+        }
+        
+        if (minTeams != null && maxTeams != null && minTeams > maxTeams) {
+            throw new BusinessRuleException("A quantidade mínima de times não pode ser maior que a quantidade máxima.");
+        }
+
         League league = new League();
         league.setName(leagueRequest.name());
         league.setDescription(leagueRequest.description());
         league.setLogoUrl(leagueRequest.logoUrl());
+        league.setMinTeams(minTeams);
+        league.setMaxTeams(maxTeams);
 
         league.setUser(user);
         league.setCategory(category);

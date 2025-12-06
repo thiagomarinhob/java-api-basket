@@ -29,7 +29,8 @@ public class DefaultGetPlayerByIdUseCase implements GetPlayerByIdUseCase {
                 player.getBirthDate(),
                 player.getHeight(),
                 player.getJerseyNumber(),
-                player.getPhotoURL()
+                player.getPhotoURL(),
+                player.getPosition()
         );
     }
 }

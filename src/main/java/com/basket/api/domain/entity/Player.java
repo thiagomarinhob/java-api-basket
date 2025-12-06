@@ -30,6 +30,9 @@ public class Player {
     private Integer jerseyNumber;
     private String photoURL;
 
+    @Enumerated(EnumType.STRING)
+    private PlayerPosition position;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp

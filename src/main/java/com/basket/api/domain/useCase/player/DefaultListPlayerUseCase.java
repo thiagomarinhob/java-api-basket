@@ -31,7 +31,8 @@ public class DefaultListPlayerUseCase implements ListPlayerUseCase {
                 player.getBirthDate(),
                 player.getHeight(),
                 player.getJerseyNumber(),
-                player.getPhotoURL()
+                player.getPhotoURL(),
+                player.getPosition()
         );
     }
 }

@@ -4,6 +4,7 @@ import com.basket.api.domain.entity.Team;
 import com.basket.api.domain.useCase.team.CreateTeamUseCase;
 import com.basket.api.domain.useCase.team.GetTeamByIdUseCase;
 import com.basket.api.domain.useCase.team.ListTeamUseCase;
+import com.basket.api.domain.useCase.team.ListTeamByCategoryUseCase;
 import com.basket.api.domain.useCase.team.TeamResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import jakarta.validation.Valid;
 
@@ -27,6 +30,7 @@ public class TeamController implements TeamAPI {
     private final CreateTeamUseCase createTeamUseCase;
     private final GetTeamByIdUseCase getTeamByIdUseCase;
     private final ListTeamUseCase listTeamUseCase;
+    private final ListTeamByCategoryUseCase listTeamByCategoryUseCase;
 
     @Override
     public ResponseEntity<Object> createTeam(@Valid @RequestBody Team team) throws AuthenticationException {
@@ -47,5 +51,11 @@ public class TeamController implements TeamAPI {
         PageRequest pageRequest = PageRequest.of(page, size);
         Page<TeamResponse> teamsPage = this.listTeamUseCase.execute(pageRequest);
         return ResponseEntity.ok(teamsPage);
+    }
+
+    @Override
+    public ResponseEntity<List<TeamResponse>> getTeamsByCategory(@PathVariable UUID categoryId) {
+        List<TeamResponse> teams = this.listTeamByCategoryUseCase.execute(categoryId);
+        return ResponseEntity.ok(teams);
     }
 }

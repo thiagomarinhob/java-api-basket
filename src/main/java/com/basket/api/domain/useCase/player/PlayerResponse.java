@@ -1,5 +1,7 @@
 package com.basket.api.domain.useCase.player;
 
+import com.basket.api.domain.entity.PlayerPosition;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,7 +14,8 @@ public record PlayerResponse(
         Date birthDate,
         Float height,
         Integer jerseyNumber,
-        String photoURL
+        String photoURL,
+        PlayerPosition position
 ) {
 }
 

@@ -19,7 +19,7 @@ public class DefaultGetTeamByIdUseCase implements GetTeamByIdUseCase {
 
     @Override
     public TeamResponse execute(UUID id) {
-        Team team = teamRepository.findById(id)
+        Team team = teamRepository.findByIdWithCategories(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Team not found with ID: " + id));
 
         List<CategoryResponse> categoryResponses = team.getCategoryEntityList()

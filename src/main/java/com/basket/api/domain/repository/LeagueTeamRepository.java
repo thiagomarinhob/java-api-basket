@@ -6,10 +6,12 @@ import com.basket.api.domain.entity.League;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface LeagueTeamRepository extends JpaRepository<LeagueTeam, UUID> {
     boolean existsByLeagueAndTeam(League league, Team team);
     List<LeagueTeam> findByLeagueId(UUID leagueId);
-
+    long countByLeague(League league);
+    Optional<LeagueTeam> findByLeagueAndTeam(League league, Team team);
 }

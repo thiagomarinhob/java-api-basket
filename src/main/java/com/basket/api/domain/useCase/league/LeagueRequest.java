@@ -10,5 +10,7 @@ public record LeagueRequest(
         LocalDate startDate,
         LocalDate endDate,
         UUID categoryId,
-        UUID userId
+        UUID userId,
+        Integer minTeams,
+        Integer maxTeams
 ) {}

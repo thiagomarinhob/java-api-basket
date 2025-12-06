@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.naming.AuthenticationException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -52,5 +53,13 @@ public interface TeamAPI {
     ResponseEntity<Page<TeamResponse>> getAllTeams(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size);
+
+    @GetMapping("/category/{categoryId}")
+    @Operation(summary = "Lista times por categoria", description = "Retorna uma lista de todos os times que possuem a categoria especificada.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Categoria não encontrada")
+    })
+    ResponseEntity<List<TeamResponse>> getTeamsByCategory(@PathVariable UUID categoryId);
 }
 

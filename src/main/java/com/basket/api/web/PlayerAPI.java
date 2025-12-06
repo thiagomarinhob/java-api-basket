@@ -1,6 +1,7 @@
 package com.basket.api.web;
 
 import com.basket.api.domain.entity.Player;
+import com.basket.api.domain.entity.PlayerPosition;
 import com.basket.api.domain.useCase.player.PlayerResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.naming.AuthenticationException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -52,5 +54,12 @@ public interface PlayerAPI {
             @ApiResponse(responseCode = "404", description = "Jogador não encontrado")
     })
     ResponseEntity<PlayerResponse> getPlayer(@PathVariable UUID id) throws AuthenticationException;
+
+    @GetMapping("/positions")
+    @Operation(summary = "Lista todas as posições disponíveis", description = "Retorna todas as posições de jogador disponíveis no sistema")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de posições retornada com sucesso")
+    })
+    ResponseEntity<List<PlayerPosition>> getPositions();
 }
 

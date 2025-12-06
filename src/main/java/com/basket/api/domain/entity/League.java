@@ -37,6 +37,12 @@ public class League {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    @Column(name = "min_teams")
+    private Integer minTeams;
+
+    @Column(name = "max_teams")
+    private Integer maxTeams;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
