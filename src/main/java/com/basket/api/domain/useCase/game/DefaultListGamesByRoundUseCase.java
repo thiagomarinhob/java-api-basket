@@ -7,18 +7,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class DefaultListGameByLeagueIdUseCase implements ListGameByLeagueIdUseCase {
+public class DefaultListGamesByRoundUseCase implements ListGamesByRoundUseCase {
 
     private final GameRepository gameRepository;
 
     @Override
-    public List<GameResponse> execute(UUID leagueId) {
-        List<Game> games = gameRepository.findByLeagueId(leagueId);
+    public List<GameResponse> execute(Input input) {
+        List<Game> games = gameRepository.findByLeagueIdAndRound(input.leagueId(), input.round());
 
         return games.stream().map(game -> new GameResponse(
                 game.getId(),
@@ -34,3 +33,4 @@ public class DefaultListGameByLeagueIdUseCase implements ListGameByLeagueIdUseCa
         )).collect(Collectors.toList());
     }
 }
+

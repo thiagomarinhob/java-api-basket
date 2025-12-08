@@ -12,4 +12,6 @@ public interface GameRepository extends JpaRepository<Game, UUID>, JpaSpecificat
     List<Game> findByLeagueId(UUID leagueId);
 
     List<Game> findByLeagueIdAndStatus(UUID leagueId, GameStatus status);
+
+    List<Game> findByLeagueIdAndRound(UUID leagueId, Integer round);
 }

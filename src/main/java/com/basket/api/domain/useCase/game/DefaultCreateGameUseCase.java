@@ -70,6 +70,7 @@ public class DefaultCreateGameUseCase implements CreateGameUseCase {
         game.setAwayTeam(awayTeam);
         game.setVenue(gameRequest.venue());
         game.setScheduledDate(gameRequest.scheduledDate());
+        game.setRound(gameRequest.round());
         game.setStatus(gameRequest.status() != null ? gameRequest.status() : GameStatus.SCHEDULED);
 
         Game savedGame = gameRepository.save(game);
@@ -81,6 +82,7 @@ public class DefaultCreateGameUseCase implements CreateGameUseCase {
                 new GameTeamResponse(savedGame.getAwayTeam().getId(), savedGame.getAwayTeam().getName(), savedGame.getAwayTeam().getLogoUrl()),
                 savedGame.getVenue(),
                 savedGame.getScheduledDate(),
+                savedGame.getRound(),
                 savedGame.getStatus(),
                 savedGame.getHomeScore(),
                 savedGame.getAwayScore()

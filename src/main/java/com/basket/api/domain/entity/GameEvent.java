@@ -1,5 +1,6 @@
 package com.basket.api.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @Entity(name = "game_events")
 @Data
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class GameEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -16,14 +18,17 @@ public class GameEvent {
 
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Game game;
 
     @ManyToOne
     @JoinColumn(name = "player_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Player player;
 
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Team team;
 
     @Enumerated(EnumType.STRING)

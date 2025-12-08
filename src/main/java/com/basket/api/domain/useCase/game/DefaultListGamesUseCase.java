@@ -38,6 +38,7 @@ public class DefaultListGamesUseCase implements ListGamesUseCase {
                 new GameTeamResponse(game.getAwayTeam().getId(), game.getAwayTeam().getName(), game.getAwayTeam().getLogoUrl()),
                 game.getVenue(),
                 game.getScheduledDate(),
+                game.getRound(),
                 game.getStatus(),
                 game.getHomeScore(),
                 game.getAwayScore()

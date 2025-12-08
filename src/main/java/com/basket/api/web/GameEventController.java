@@ -1,8 +1,8 @@
 package com.basket.api.web;
 
-import com.basket.api.domain.entity.GameEvent;
 import com.basket.api.domain.useCase.gameEvent.AddGameEventUseCase;
 import com.basket.api.domain.useCase.gameEvent.GameEventRequest;
+import com.basket.api.domain.useCase.gameEvent.GameEventResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,8 @@ public class GameEventController implements GameEventAPI {
     private final AddGameEventUseCase addGameEventUseCase;
 
     @Override
-    public ResponseEntity<GameEvent> createGameEvent(@RequestBody GameEventRequest request) throws AuthenticationException {
-        GameEvent event = addGameEventUseCase.execute(request);
+    public ResponseEntity<GameEventResponse> createGameEvent(@RequestBody GameEventRequest request) throws AuthenticationException {
+        GameEventResponse event = addGameEventUseCase.execute(request);
         return ResponseEntity.ok(event);
     }
 }

@@ -11,6 +11,7 @@ public record GameRequest(
         UUID awayTeamId,
         String venue,
         LocalDateTime scheduledDate,
+        Integer round,
         GameStatus status
 ) {
 }

@@ -1,5 +1,6 @@
 package com.basket.api.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @Data
 @Entity(name = "player")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

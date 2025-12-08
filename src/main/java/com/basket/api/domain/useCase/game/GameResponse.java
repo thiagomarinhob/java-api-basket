@@ -11,6 +11,7 @@ public record GameResponse(
         GameTeamResponse awayTeam,
         String venue,
         LocalDateTime scheduledDate,
+        Integer round,
         GameStatus status,
         Integer homeScore,
         Integer awayScore

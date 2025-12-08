@@ -45,6 +45,17 @@ public interface GameAPI {
     })
     ResponseEntity<List<GameResponse>> listGamesByLeague(@PathVariable UUID leagueId) throws AuthenticationException;
 
+    @GetMapping("/league/{leagueId}/round/{round}")
+    @Operation(summary = "Lista jogos de uma rodada específica", description = "Retorna uma lista de jogos de uma liga para uma rodada específica.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Busca bem-sucedida"),
+            @ApiResponse(responseCode = "404", description = "Liga não encontrada")
+    })
+    ResponseEntity<List<GameResponse>> listGamesByRound(
+            @PathVariable UUID leagueId,
+            @PathVariable Integer round
+    ) throws AuthenticationException;
+
     @GetMapping
     @Operation(summary = "Lista jogos com filtros", description = "Lista jogos paginados com filtros opcionais de liga, status e data.")
     ResponseEntity<Page<GameResponse>> listGames(
@@ -54,5 +65,23 @@ public interface GameAPI {
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
             @Parameter(hidden = true) @PageableDefault(size = 10) Pageable pageable
     );
+
+    @PutMapping("/{gameId}/start")
+    @Operation(summary = "Inicia uma partida", description = "Altera o status do jogo para 'IN_PROGRESS'.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Partida iniciada com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Não é possível iniciar a partida (já iniciada, cancelada ou finalizada)"),
+            @ApiResponse(responseCode = "404", description = "Jogo não encontrado")
+    })
+    ResponseEntity<GameResponse> startGame(@PathVariable UUID gameId) throws AuthenticationException;
+
+    @PutMapping("/{gameId}/end")
+    @Operation(summary = "Encerra uma partida", description = "Altera o status do jogo para 'COMPLETED'.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Partida encerrada com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Não é possível encerrar a partida (já encerrada, cancelada ou não iniciada)"),
+            @ApiResponse(responseCode = "404", description = "Jogo não encontrado")
+    })
+    ResponseEntity<GameResponse> endGame(@PathVariable UUID gameId) throws AuthenticationException;
 }
 

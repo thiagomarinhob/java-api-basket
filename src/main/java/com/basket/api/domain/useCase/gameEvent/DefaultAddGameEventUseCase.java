@@ -21,7 +21,7 @@ public class DefaultAddGameEventUseCase implements AddGameEventUseCase {
 
     @Override
     @Transactional
-    public GameEvent execute(GameEventRequest request) {
+    public GameEventResponse execute(GameEventRequest request) {
         Game game = gameRepository.findById(request.gameId())
                 .orElseThrow(() -> new ResourceNotFoundException("Game not found"));
 
@@ -44,7 +44,24 @@ public class DefaultAddGameEventUseCase implements AddGameEventUseCase {
             applyEventToStatsAndGame(game, team, player, request);
         }
 
-        return savedEvent;
+        // Converte para DTO para evitar problemas de serialização com proxies do Hibernate
+        return new GameEventResponse(
+                savedEvent.getId(),
+                new GameEventGameResponse(savedEvent.getGame().getId()),
+                savedEvent.getPlayer() != null 
+                    ? new GameEventPlayerResponse(
+                        savedEvent.getPlayer().getId(),
+                        savedEvent.getPlayer().getFirstName(),
+                        savedEvent.getPlayer().getLastName(),
+                        savedEvent.getPlayer().getNickName()
+                    )
+                    : null,
+                new GameEventTeamResponse(savedEvent.getTeam().getId(), savedEvent.getTeam().getName()),
+                savedEvent.getEventType(),
+                savedEvent.getEventTime(),
+                savedEvent.getPoints(),
+                savedEvent.getCreatedAt()
+        );
     }
 
     private Player resolvePlayer(GameEventRequest request) {
